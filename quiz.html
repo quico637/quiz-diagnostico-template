@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico — ¿Cuánto os cuesta esa tarea manual?</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/css/intlTelInput.css">
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/js/intlTelInputWithUtils.min.js"></script>
+<!-- Meta Pixel Code — reemplaza TU_PIXEL_ID_AQUI por el ID de tu píxel (idéntico en index.html, quiz.html y resultado.html) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'TU_PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=TU_PIXEL_ID_AQUI&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+
+:root {
+  --bg: #08060e;
+  --navy: #120e1e;
+  --navy2: #1a1430;
+  --gold: #c9a86a;
+  --gold2: #e6cf9f;
+  --cream: #ede7da;
+  --slate: #8a82a6;
+  --slate2: #5e5680;
+  /* Paleta de ejemplo (lila + dorado). Cámbiala por los colores de tu marca:
+     estas variables controlan botones, barra de progreso, halos y selección. */
+  --lila:#7b3fe4;
+  --lila-deep:#5d20d6;
+  --lila-soft:rgba(123,63,228,0.14);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position:fixed;
+  top:-200px; left:50%;
+  transform:translateX(-50%);
+  width:700px; height:700px;
+  border-radius:50%;
+  background: radial-gradient(ellipse, rgba(93,32,214,0.30) 0%, transparent 70%);
+  pointer-events:none;
+  filter:blur(60px);
+}
+.nav {
+  width:100%; max-width:640px;
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:40px;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-orb {
+  width:34px; height:34px; border-radius:50%;
+  background: radial-gradient(ellipse at 40% 35%, #3b1e7a 0%, #14092e 70%);
+  border: 1px solid rgba(201,168,106,0.15);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:15px; color:var(--gold2);
+}
+.nav-name { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:17px; letter-spacing:0.22em; color:var(--cream); text-transform:uppercase; }
+.nav-sub { font-size:6.5px; letter-spacing:0.3em; color:var(--slate); text-transform:uppercase; display:block; margin-top:1px; }
+.quiz-wrap { width:100%; max-width:620px; }
+.quiz-header { text-align:center; margin-bottom:36px; animation: fadeUp .7s ease both; }
+.quiz-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(201,168,106,0.07); border: 1px solid rgba(201,168,106,0.15);
+  border-radius:100px; padding:5px 16px;
+  font-size:8.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:18px;
+}
+.dot-pulse { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.6; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.4);} }
+.quiz-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(26px,5vw,40px); color:var(--cream); line-height:1.1; margin-bottom:10px; }
+.quiz-title em { font-style:italic; background:linear-gradient(135deg,var(--gold2),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.quiz-subtitle { font-size:11.5px; font-weight:300; color:var(--slate); line-height:1.7; }
+.progress-wrap { margin-bottom:28px; animation: fadeUp .7s .1s ease both; }
+.progress-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.progress-label { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--slate); }
+.progress-num { font-size:9px; letter-spacing:0.1em; color:var(--gold); }
+.progress-track { width:100%; height:2px; background:rgba(201,168,106,0.1); border-radius:100px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--lila-deep),#a173ff); border-radius:100px; transition:width .5s ease; box-shadow:0 0 8px rgba(123,63,228,0.3); }
+.question-card {
+  background:linear-gradient(135deg,rgba(18,14,30,0.95),rgba(12,9,20,0.98));
+  border:1px solid rgba(201,168,106,0.1); border-radius:16px; padding:36px 32px;
+  box-shadow:0 40px 100px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04);
+  position:relative; overflow:hidden;
+  animation: fadeUp .6s .15s ease both;
+}
+.question-card::before {
+  content:''; position:absolute; top:0; left:15%; right:15%; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,106,0.3),transparent);
+}
+.q-num { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:12px; color:rgba(201,168,106,0.4); letter-spacing:0.2em; margin-bottom:10px; display:block; }
+.q-text { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(17px,3vw,22px); color:var(--cream); line-height:1.3; margin-bottom:24px; }
+.options { display:flex; flex-direction:column; gap:9px; }
+.option {
+  background:rgba(14,10,24,0.6); border:1px solid rgba(201,168,106,0.08); border-radius:10px;
+  padding:13px 18px; cursor:pointer; transition:all .22s;
+  display:flex; align-items:center; gap:13px; text-align:left; width:100%;
+  position:relative; overflow:hidden;
+}
+.option:hover { border-color: rgba(138,82,238,0.28); transform:translateX(3px); }
+.option.selected {
+  border-color: rgba(138,82,238,0.55);
+  background: linear-gradient(135deg, rgba(123,63,228,0.16), rgba(93,32,214,0.06));
+  box-shadow: 0 0 30px rgba(123,63,228,0.16);
+  transform:translateX(3px);
+}
+.option-radio {
+  width:18px; height:18px; border-radius:50%; border:1px solid rgba(201,168,106,0.3);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .22s;
+}
+.option.selected .option-radio { border-color:#a173ff; background:#a173ff; }
+.option-radio-inner { width:6px; height:6px; border-radius:50%; background:var(--bg); opacity:0; transition:opacity .22s; }
+.option.selected .option-radio-inner { opacity:1; }
+.option-text { font-size:12.5px; font-weight:300; color:var(--cream); letter-spacing:0.02em; line-height:1.4; }
+.btn-back {
+  width:100%; margin-top:10px;
+  background:transparent; color:var(--slate2);
+  border:1px solid rgba(201,168,106,0.08); border-radius:10px;
+  padding:11px; font-family:'Montserrat',sans-serif;
+  font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+  cursor:pointer; transition:all .22s; display:none;
+}
+.btn-back:hover { border-color:rgba(201,168,106,0.2); color:var(--slate); }
+.btn-back.visible { display:block; }
+
+/* EMAIL SCREEN */
+.email-screen { display:none; animation: fadeUp .6s ease both; }
+.email-card {
+  background:linear-gradient(135deg,rgba(18,14,30,0.95),rgba(12,9,20,0.98));
+  border:1px solid rgba(201,168,106,0.1); border-radius:16px; padding:40px 32px;
+  box-shadow:0 40px 100px rgba(0,0,0,0.5); text-align:center; position:relative; overflow:hidden;
+}
+.email-card::before { content:''; position:absolute; top:0; left:15%; right:15%; height:1px; background:linear-gradient(90deg,transparent,rgba(201,168,106,0.3),transparent); }
+.email-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:28px; color:var(--cream); margin-bottom:10px; }
+.email-sub { font-size:12px; font-weight:300; color:var(--slate); line-height:1.7; margin-bottom:28px; }
+.field {
+  width:100%; background:rgba(14,10,24,0.8); border:1px solid rgba(201,168,106,0.15); border-radius:10px;
+  padding:15px 18px; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:300;
+  color:var(--cream); outline:none; transition:border-color .25s; letter-spacing:0.02em; margin-bottom:12px; display:block;
+}
+.field::placeholder { color:var(--slate2); }
+.field:focus { border-color:rgba(201,168,106,0.4); }
+.btn-analyze {
+  width:100%;
+  background: linear-gradient(135deg, #8a52ee 0%, #5d20d6 100%);
+  color:#f6f1ff;
+  border:1px solid rgba(180,140,255,0.35);
+  padding:16px; border-radius:10px;
+  font-family:'Montserrat',sans-serif; font-weight:500; font-size:10px; letter-spacing:0.25em; text-transform:uppercase;
+  cursor:pointer; transition:all .3s;
+  box-shadow: 0 0 40px rgba(123,63,228,0.28), 0 6px 22px rgba(0,0,0,0.5);
+}
+.btn-analyze:hover { box-shadow: 0 0 66px rgba(123,63,228,0.45), 0 10px 30px rgba(0,0,0,0.55); transform:translateY(-1px); }
+.email-legal { font-size:9px; color:var(--slate2); margin-top:12px; line-height:1.6; }
+
+/* SELECTOR DE PAÍS (intl-tel-input) */
+.iti { width:100%; margin-bottom:12px; display:flex; }
+.iti input.field { margin-bottom:0; flex:1; border-radius:0 10px 10px 0; border-left:none; }
+.iti__selected-country {
+  background:rgba(14,10,24,0.8) !important; border:1px solid rgba(201,168,106,0.15); border-right:none;
+  border-radius:10px 0 0 10px; padding:0 10px; display:flex; align-items:center;
+}
+.iti__selected-country:hover, .iti__selected-country:focus { background:rgba(201,168,106,0.08) !important; }
+.iti__selected-country-primary { display:flex; align-items:center; gap:6px; }
+.iti__dial-code { color:var(--cream); font-family:'Montserrat',sans-serif; font-size:13px; }
+.iti__arrow { border-top-color:var(--slate); margin-left:6px; }
+.iti__arrow--up { border-bottom-color:var(--slate); }
+.iti__dropdown-content, .iti__country-list {
+  background:#150f26; border:1px solid rgba(201,168,106,0.2); border-radius:10px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6); font-family:'Montserrat',sans-serif;
+}
+.iti__country { color:var(--cream); font-size:13px; padding:9px 12px; }
+.iti__country.iti__highlight { background:rgba(201,168,106,0.12); }
+.iti__country .iti__dial-code { color:var(--slate); }
+.iti__search-input {
+  background:rgba(14,10,24,0.9); border:1px solid rgba(201,168,106,0.15); color:var(--cream);
+  font-family:'Montserrat',sans-serif; font-size:13px; border-radius:6px;
+}
+.iti__divider { border-bottom:1px solid rgba(201,168,106,0.1); }
+.iti__flag-box { margin-right:8px; }
+
+/* LOADING */
+.loading-screen { display:none; text-align:center; animation: fadeUp .6s ease both; }
+.loading-card {
+  background:linear-gradient(135deg,rgba(18,14,30,0.95),rgba(12,9,20,0.98));
+  border:1px solid rgba(201,168,106,0.1); border-radius:16px; padding:56px 32px;
+  box-shadow:0 40px 100px rgba(0,0,0,0.5); position:relative; overflow:hidden;
+}
+.loading-card::before { content:''; position:absolute; top:0; left:15%; right:15%; height:1px; background:linear-gradient(90deg,transparent,rgba(201,168,106,0.3),transparent); }
+.loading-spinner { width:52px; height:52px; border:1px solid rgba(201,168,106,0.15); border-top:1px solid #a173ff; border-radius:50%; margin:0 auto 22px; animation:spin 1s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg);} }
+.loading-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:22px; color:var(--cream); margin-bottom:8px; }
+.loading-steps { display:flex; flex-direction:column; gap:8px; margin-top:22px; text-align:left; max-width:280px; margin-left:auto; margin-right:auto; }
+.loading-step { display:flex; align-items:center; gap:10px; font-size:11px; font-weight:300; color:var(--slate2); transition:color .3s; }
+.loading-step.active { color:var(--gold); }
+.loading-step.done { color:#2fa37a; }
+.step-dot { width:6px; height:6px; border-radius:50%; background:var(--slate2); flex-shrink:0; transition:background .3s; }
+.loading-step.active .step-dot { background:var(--gold); }
+.loading-step.done .step-dot { background:#2fa37a; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+@media(max-width:600px) {
+  body { padding:24px 16px 60px; }
+  .question-card,.email-card,.loading-card { padding:26px 20px; }
+  .field { font-size:16px; } /* evita zoom automático en iOS */
+  .option-text { font-size:12px; }
+  .q-text { font-size:16px; }
+  .quiz-title { font-size:26px; }
+}
+</style>
+</head>
+<body>
+<script>
+/* ══ CAPTURA DE ATRIBUCIÓN ══════════════════════════════════════
+   Guarda los parámetros de la URL en cuanto la persona aterriza, en CUALQUIER
+   página. Sin esto, quien llega a la landing desde un anuncio y luego pincha
+   en "Hacer el diagnóstico" pierde los UTM por el camino, porque el enlace
+   interno va a /quiz sin parámetros. La misma clave de localStorage se usa
+   en index.html, quiz.html y resultado.html — si la renombras, hazlo en los tres.
+   ═════════════════════════════════════════════════════════════ */
+(function () {
+  var KEY = 'diag_attrib';
+  var CAMPOS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
+                'fbclid','gclid','ttclid','msclkid','ref'];
+  try {
+    var p = new URLSearchParams(window.location.search);
+    var todos = {};
+    p.forEach(function (v, k) { todos[k] = v; });
+    var traeAlgo = CAMPOS.some(function (c) { return p.get(c); });
+    var previo = {};
+    try { previo = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+    if (traeAlgo || !previo.landing_url) {
+      var rec = {
+        landing_url: window.location.href,
+        query_params: traeAlgo ? todos : (previo.query_params || {})
+      };
+      CAMPOS.forEach(function (c) {
+        rec[c] = traeAlgo ? (p.get(c) || '') : (previo[c] || '');
+      });
+      localStorage.setItem(KEY, JSON.stringify(rec));
+    }
+  } catch (e) {}
+})();
+</script>
+<div class="nav">
+  <a href="/" class="nav-logo">
+    <!-- Logo: sustituye este círculo con inicial por tu <img> o SVG -->
+    <div class="nav-orb">T</div>
+    <div>
+      <span class="nav-name">Tu Marca</span>
+      <span class="nav-sub">Tu categoría de negocio</span>
+    </div>
+  </a>
+</div>
+
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <div class="quiz-eyebrow"><div class="dot-pulse"></div>Diagnóstico de tarea manual</div>
+    <h1 class="quiz-title">Calcula lo que os cuesta<br><em>esa tarea</em> hecha a mano</h1>
+    <p class="quiz-subtitle">5 preguntas · 1 minuto · Resultado inmediato con tu cifra anual</p>
+  </div>
+
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Progreso</span>
+      <span class="progress-num" id="progress-text">1 de 5</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:20%"></div></div>
+  </div>
+
+  <div id="question-screen">
+    <div class="question-card">
+      <span class="q-num" id="q-num">Pregunta 01</span>
+      <p class="q-text" id="q-text"></p>
+      <div class="options" id="options-wrap"></div>
+      <button class="btn-back" id="btn-back" onclick="prevQuestion()">← Pregunta anterior</button>
+    </div>
+  </div>
+
+  <div id="email-screen" class="email-screen">
+    <div class="email-card">
+      <svg width="46" height="28" viewBox="0 0 62 38" fill="none" style="margin:0 auto 18px;display:block;opacity:0.45">
+        <circle cx="10" cy="19" r="5" stroke="#c9a86a" stroke-width="1.1" fill="none"/>
+        <line x1="16" y1="19" x2="43" y2="19" stroke="#c9a86a" stroke-width="0.9" opacity="0.6"/>
+        <path d="M39 14 L44 19 L39 24" stroke="#c9a86a" stroke-width="0.9" fill="none" opacity="0.6"/>
+        <circle cx="52" cy="19" r="5" stroke="#c9a86a" stroke-width="1.1" fill="none" opacity="0.35"/>
+      </svg>
+      <h2 class="email-title">¿A dónde te mandamos el informe?</h2>
+      <p class="email-sub">Tu cálculo está listo. Déjanos dónde enviarlo y lo verás en pantalla ahora mismo, con el desglose de dónde se va el tiempo.</p>
+      <input type="text" class="field" id="user-name" placeholder="Tu nombre" autocomplete="name" />
+      <input type="text" class="field" id="user-company" placeholder="Nombre de la empresa" autocomplete="organization" />
+      <input type="email" class="field" id="user-email" placeholder="tu@empresa.com" autocomplete="email" />
+      <input type="tel" class="field" id="user-phone" placeholder="600 000 000" autocomplete="tel" />
+      <button class="btn-analyze" onclick="startAnalysis()">Ver mi informe →</button>
+      <p class="email-legal">🔒 Conforme al RGPD, tus datos se usan únicamente para enviarte este informe y contactarte sobre él. No compartimos nada con terceros.</p>
+    </div>
+  </div>
+
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+      <h2 class="loading-title">Calculando...</h2>
+      <p style="font-size:11px;font-weight:300;color:var(--slate)">Preparando tu informe</p>
+      <div class="loading-steps">
+        <div class="loading-step" id="ls-1"><div class="step-dot"></div>Cruzando frecuencia y tiempo por tarea</div>
+        <div class="loading-step" id="ls-2"><div class="step-dot"></div>Calculando horas al año dedicadas</div>
+        <div class="loading-step" id="ls-3"><div class="step-dot"></div>Aplicando el coste de esa hora</div>
+        <div class="loading-step" id="ls-4"><div class="step-dot"></div>Detectando dependencia de personas</div>
+        <div class="loading-step" id="ls-5"><div class="step-dot"></div>Generando tu informe</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN OBLIGATORIA — cambia esto antes de lanzar
+   ══════════════════════════════════════════════════════════════ */
+const WEBHOOK_URL = ''; // URL de tu webhook (n8n, GoHighLevel, Zapier, Make...). Si lo dejas vacío, el quiz funciona igual pero no envía nada a tu CRM.
+
+/* La hora de un perfil no cuesta lo mismo que la de otro (coste empresa
+   completo: bruto + SS a cargo de la empresa + coste de puesto). Se aplica
+   la que corresponda según quién haga hoy la tarea (ver pregunta "quien"). */
+const TARIFAS = {
+  operativo: 22, // persona del equipo que hace la tarea el día a día
+  gerente:   40, // responsable / gerente
+};
+const SEMANAS_ANIO = 46; // semanas trabajadas al año, para pasar de horas/semana a horas/año
+/* ════════════════════════════════════════════════════════════ */
+
+// ── Selector de país / prefijo telefónico ─────────────────────
+const phoneInputEl = document.getElementById('user-phone');
+const iti = window.intlTelInput(phoneInputEl, {
+  initialCountry: 'es',
+  preferredCountries: ['es', 'fr', 'pt', 'it', 'de', 'mx', 'co', 'ar'],
+  separateDialCode: true,
+  formatOnDisplay: true,
+});
+
+/* ══════════════════════════════════════════════════════════════
+   CONTENIDO DEL QUIZ — edita las preguntas, opciones y pesos aquí.
+   Cada opción puede llevar:
+     score       0-100, cuánto "encaja" esa respuesta con tu ICP
+     flag        null | 'orange' (aviso) | 'red' (mal encaje)
+     disqualify  true → descarta del todo (ver "startAnalysis")
+     vecesSemana / minutos / costeHora / perfil → solo en las preguntas
+                 que alimentan el cálculo del coste anual, más abajo
+   ══════════════════════════════════════════════════════════════ */
+const questions = [
+  {
+    id:'frecuencia',
+    text:'¿Con qué frecuencia hacéis esta tarea a mano?',
+    options:[
+      {text:'Varias veces al día', score:100, vecesSemana:25, flag:null},
+      {text:'Una vez al día, más o menos', score:90, vecesSemana:5, flag:null},
+      {text:'Varias veces por semana', score:75, vecesSemana:3, flag:null},
+      {text:'Rara vez, casi no pasa', score:30, vecesSemana:0.5, flag:'orange'},
+      {text:'Ya no la hacemos a mano: está automatizada', score:5, vecesSemana:0, flag:'red', disqualify:true},
+    ]
+  },
+  {
+    id:'minutos',
+    text:'¿Cuánto tiempo os lleva cada vez que la hacéis?',
+    options:[
+      {text:'Más de 30 minutos', score:100, minutos:40, flag:null},
+      {text:'Entre 15 y 30 minutos', score:85, minutos:20, flag:null},
+      {text:'Entre 5 y 15 minutos', score:65, minutos:10, flag:null},
+      {text:'Menos de 5 minutos', score:35, minutos:3, flag:'orange'},
+    ]
+  },
+  {
+    id:'quien',
+    text:'¿Quién se encarga hoy de esta tarea?',
+    options:[
+      {text:'Una persona concreta del equipo', score:100, flag:null, perfil:'operativo'},
+      {text:'Varias personas, cada una la suya', score:85, flag:null, perfil:'operativo'},
+      {text:'El responsable o gerente, cuando puede', score:90, flag:null, perfil:'gerente'},
+      {text:'Nadie fijo: se reparte según quién tenga hueco', score:60, flag:'orange', perfil:'operativo'},
+    ]
+  },
+  {
+    id:'dependencia',
+    text:'Si la persona que lo lleva falta una semana, ¿qué pasa?',
+    options:[
+      {text:'Se atasca todo hasta que vuelve', score:100, flag:null},
+      {text:'Va más lento y se cometen más errores', score:80, flag:null},
+      {text:'Alguien lo cubre a medias, con ayuda del resto', score:60, flag:null},
+      {text:'No pasa nada, cualquiera lo hace igual', score:30, flag:'orange'},
+    ]
+  },
+  {
+    id:'tamano',
+    text:'¿Cuántas personas sois en el equipo o empresa?',
+    options:[
+      {text:'Más de 50', score:100, flag:null},
+      {text:'Entre 15 y 50', score:90, flag:null},
+      {text:'Entre 5 y 15', score:60, flag:'orange'},
+      {text:'Menos de 5', score:15, flag:'red'},
+    ]
+  },
+];
+
+/* Ponderación para el score de encaje. Ajusta según lo que más te importe
+   calificar: aquí el volumen (frecuencia × minutos) y el tamaño de empresa
+   pesan más que quién concretamente hace la tarea. */
+const PESOS = {
+  frecuencia:  25,
+  minutos:     20,
+  quien:       10,
+  dependencia: 20,
+  tamano:      25,
+};
+
+function getAnswer(id) {
+  return answers.find(a => a.q.id === id);
+}
+
+function calcularScorePonderado(answers) {
+  let sumaPonderada = 0, sumaPesos = 0;
+  answers.forEach(a => {
+    const peso = PESOS[a.q.id] || 10;
+    sumaPonderada += a.a.score * peso;
+    sumaPesos += peso;
+  });
+  return sumaPesos ? Math.round(sumaPonderada / sumaPesos) : 0;
+}
+
+let currentQ = 0;
+let answers = [];
+let quizStarted = false;
+let selectedOption = null;
+
+// Identificadores de Meta. Sin esto, un evento enviado por CAPI no se puede
+// casar con el clic en el anuncio y la atribución se va al garete.
+// _fbp lo pone el píxel en una cookie; fbclid llega en la URL desde el anuncio.
+function getCookie(name) {
+  const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+  return m ? m.pop() : '';
+}
+
+function getMetaIds() {
+  const a = getAttrib();
+  let fbclid = new URLSearchParams(window.location.search).get('fbclid') || a.fbclid || '';
+  let fbc = getCookie('_fbc');
+  if (!fbc && fbclid) fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+  if (!fbclid && fbc) {
+    const partes = fbc.split('.');
+    if (partes.length >= 4) fbclid = partes.slice(3).join('.');
+  }
+  return { fbp: getCookie('_fbp'), fbc: fbc || '', fbclid: fbclid };
+}
+
+// Atribución guardada al aterrizar (ver el script del principio del body)
+function getAttrib() {
+  try { return JSON.parse(localStorage.getItem('diag_attrib') || '{}'); }
+  catch (e) { return {}; }
+}
+
+// UTMs: primero los de esta URL, si no los que se guardaron al aterrizar
+function getUTMs() {
+  const params = new URLSearchParams(window.location.search);
+  const a = getAttrib();
+  const leer = (c) => params.get(c) || a[c] || '';
+  return {
+    utm_source:   leer('utm_source') || 'organico',
+    utm_medium:   leer('utm_medium'),
+    utm_campaign: leer('utm_campaign'),
+    utm_content:  leer('utm_content'),
+    utm_term:     leer('utm_term'),
+    landing_url:  a.landing_url || window.location.href,
+    query_params: JSON.stringify(a.query_params || {}),
+  };
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('q-num').textContent = 'Pregunta ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' de ' + questions.length;
+  document.getElementById('progress-fill').style.width = (((currentQ+1)/questions.length)*100) + '%';
+  const wrap = document.getElementById('options-wrap');
+  wrap.innerHTML = '';
+  selectedOption = null;
+
+  const backBtn = document.getElementById('btn-back');
+  if (currentQ > 0) backBtn.classList.add('visible');
+  else backBtn.classList.remove('visible');
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.onclick = () => {
+      // Meta — InitiateCheckout solo en la primera interacción
+      if (!quizStarted) {
+        quizStarted = true;
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'InitiateCheckout', { content_name: 'Diagnostico' });
+        }
+      }
+      selectOption(i, btn);
+      setTimeout(() => nextQuestion(), 320);
+    };
+    btn.innerHTML = '<div class="option-radio"><div class="option-radio-inner"></div></div><span class="option-text">'+opt.text+'</span>';
+    wrap.appendChild(btn);
+  });
+
+  if (answers[currentQ]) {
+    const prevIdx = questions[currentQ].options.findIndex(o => o.text === answers[currentQ].a.text);
+    if (prevIdx >= 0) {
+      const opts = wrap.querySelectorAll('.option');
+      opts[prevIdx].classList.add('selected');
+      selectedOption = prevIdx;
+    }
+  }
+}
+
+function selectOption(idx, el) {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedOption = idx;
+}
+
+function nextQuestion() {
+  if (selectedOption === null) return;
+  const q = questions[currentQ];
+  answers[currentQ] = { q, a: q.options[selectedOption] };
+  currentQ++;
+
+  if (currentQ < questions.length) {
+    const screen = document.getElementById('question-screen');
+    screen.style.opacity = '0';
+    screen.style.transform = 'translateY(8px)';
+    setTimeout(() => {
+      renderQuestion();
+      screen.style.transition = 'all .35s ease';
+      screen.style.opacity = '1';
+      screen.style.transform = 'translateY(0)';
+    }, 180);
+  } else {
+    document.getElementById('question-screen').style.display = 'none';
+    document.getElementById('progress-wrap').style.display = 'none';
+    document.getElementById('email-screen').style.display = 'block';
+  }
+}
+
+function prevQuestion() {
+  if (currentQ <= 0) return;
+  currentQ--;
+  answers = answers.slice(0, currentQ);
+  selectedOption = null;
+  const screen = document.getElementById('question-screen');
+  screen.style.opacity = '0';
+  screen.style.transform = 'translateY(-8px)';
+  setTimeout(() => {
+    renderQuestion();
+    screen.style.transition = 'all .35s ease';
+    screen.style.opacity = '1';
+    screen.style.transform = 'translateY(0)';
+  }, 180);
+}
+
+function startAnalysis() {
+  const name    = document.getElementById('user-name').value.trim();
+  const company = document.getElementById('user-company').value.trim();
+  const email   = document.getElementById('user-email').value.trim();
+  const phone   = phoneInputEl.value.trim() ? iti.getNumber() : '';
+
+  if (!name)  { document.getElementById('user-name').focus(); return; }
+  if (!email || !email.includes('@')) { document.getElementById('user-email').focus(); return; }
+
+  // ── Puntuación ──────────────────────────────────────────────
+  const hasDisqualifier = answers.some(a => a.a.disqualify);
+  const redFlags    = answers.filter(a => a.a.flag === 'red').length;
+  const orangeFlags = answers.filter(a => a.a.flag === 'orange').length;
+
+  let score = hasDisqualifier ? 0 : calcularScorePonderado(answers);
+  // Dos banderas rojas (o una sola, algo menos) bastan para mandarlo a la
+  // rama de "no encaja" del resultado, aunque el resto puntúe bien.
+  if (redFlags >= 2) score = Math.min(score, 20);
+  else if (redFlags === 1) score = Math.min(score, 38);
+
+  // Si encaja, el teléfono es obligatorio
+  const encaja = score >= 40 && !hasDisqualifier;
+  if (encaja && (!phoneInputEl.value.trim() || !iti.isValidNumber())) {
+    phoneInputEl.focus();
+    phoneInputEl.style.borderColor = '#c0392b';
+    phoneInputEl.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.15)';
+    setTimeout(() => { phoneInputEl.style.borderColor=''; phoneInputEl.style.boxShadow=''; }, 3500);
+    return;
+  }
+
+  // ── Coste anual: frecuencia × minutos × tarifa de quien lo hace ──
+  const vecesSemana = getAnswer('frecuencia').a.vecesSemana || 0;
+  const minutos     = getAnswer('minutos').a.minutos || 0;
+  const perfil      = getAnswer('quien').a.perfil || 'operativo';
+  const costeHora   = TARIFAS[perfil] || TARIFAS.operativo;
+
+  const horasSemana = (vecesSemana * minutos) / 60;
+  const horasAnio   = Math.round(horasSemana * SEMANAS_ANIO);
+  const costeTotal  = Math.round((horasAnio * costeHora) / 100) * 100;
+
+  // ── Categorías del desglose en /resultado ──────────────────
+  const cats = {
+    'Frecuencia y volumen':     getAnswer('frecuencia').a.score,
+    'Tiempo por tarea':         getAnswer('minutos').a.score,
+    'Dependencia de una persona': Math.round((getAnswer('quien').a.score + getAnswer('dependencia').a.score) / 2),
+    'Tamaño y estructura':      getAnswer('tamano').a.score,
+  };
+
+  // ── Meta ────────────────────────────────────────────────────
+  // CompleteRegistration NO se dispara aquí: idealmente sale del workflow de
+  // tu CRM por la API de Conversiones (CAPI), cuando el lead se confirma de
+  // verdad. Si lo disparas también desde el navegador, cuentas doble.
+
+  // ── Envío al CRM ─────────────────────────────────────────────
+  const utms = getUTMs();
+  const meta = getMetaIds();
+  const nivel = score >= 70 ? 'Alto' : score >= 40 ? 'Medio' : 'Bajo';
+  const payload = {
+    name, company, email, phone,
+    score, nivel,
+    coste_anual: costeTotal,
+    horas_anuales: horasAnio,
+    coste_hora: costeHora,
+    perfil,
+    frecuencia:  getAnswer('frecuencia')?.a.text || '',
+    minutos_tarea: getAnswer('minutos')?.a.text || '',
+    quien:       getAnswer('quien')?.a.text || '',
+    dependencia: getAnswer('dependencia')?.a.text || '',
+    tamano:      getAnswer('tamano')?.a.text || '',
+    descartado: hasDisqualifier,
+    source: utms.utm_source === 'organico' ? 'Diagnóstico - Orgánico' : 'Diagnóstico - ' + utms.utm_source,
+    utm_source: utms.utm_source,
+    utm_medium: utms.utm_medium,
+    utm_campaign: utms.utm_campaign,
+    utm_content: utms.utm_content,
+    utm_term: utms.utm_term,
+    // Para la API de Conversiones (CAPI) desde tu workflow del CRM:
+    fbp: meta.fbp,
+    fbc: meta.fbc,
+    fbclid: meta.fbclid,
+    event_source_url: window.location.href,
+    landing_url: utms.landing_url,
+    query_params: utms.query_params,
+    tags: [
+      'diagnostico',
+      'encaje-' + nivel.toLowerCase(),
+      'perfil-' + perfil,
+      utms.utm_source === 'meta' ? 'paid-meta' : 'origen-' + utms.utm_source,
+    ]
+  };
+
+  if (WEBHOOK_URL) {
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {}); // si falla, no interrumpe el flujo
+  }
+
+  // ── Guardar para la página de resultado ─────────────────────
+  localStorage.setItem('diag_result', JSON.stringify({
+    name, company, email, phone, score, cats,
+    fbp: meta.fbp, fbc: meta.fbc, fbclid: meta.fbclid,
+    costeTotal, horasAnio, vecesSemana, minutos, perfil, costeHora,
+    hasDisqualifier, redFlags, orangeFlags,
+    answers: answers.map(a => ({ id: a.q.id, q: a.q.text, a: a.a.text, score: a.a.score, flag: a.a.flag }))
+  }));
+
+  // ── Pantalla de carga y redirección ─────────────────────────
+  document.getElementById('email-screen').style.display = 'none';
+  document.getElementById('loading-screen').style.display = 'block';
+
+  const steps = ['ls-1','ls-2','ls-3','ls-4','ls-5'];
+  steps.forEach((id, i) => {
+    setTimeout(() => {
+      if (i > 0) {
+        document.getElementById(steps[i-1]).classList.remove('active');
+        document.getElementById(steps[i-1]).classList.add('done');
+      }
+      document.getElementById(id).classList.add('active');
+    }, i * 650);
+  });
+
+  setTimeout(() => { window.location.href = "/resultado"; }, 4000);
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>

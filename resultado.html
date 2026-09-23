@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu informe — Tu Marca</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- Meta Pixel Code — reemplaza TU_PIXEL_ID_AQUI por el ID de tu píxel (idéntico en index.html, quiz.html y resultado.html) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'TU_PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=TU_PIXEL_ID_AQUI&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+
+:root {
+  --bg: #08060e;
+  --navy: #120e1e;
+  --navy2: #1a1430;
+  --gold: #c9a86a;
+  --gold2: #e6cf9f;
+  --cream: #ede7da;
+  --slate: #8a82a6;
+  --slate2: #5e5680;
+  --green: #2fa37a;
+  --red: #c0392b;
+  --orange: #c9a86a;
+  /* Paleta de ejemplo (lila + dorado). Cámbiala por los colores de tu marca. */
+  --lila:#7b3fe4;
+  --lila-deep:#5d20d6;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 80px;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position:fixed;
+  top:-200px; left:50%;
+  transform:translateX(-50%);
+  width:800px; height:800px;
+  border-radius:50%;
+  background: radial-gradient(ellipse, rgba(93,32,214,0.30) 0%, transparent 70%);
+  pointer-events:none;
+  filter:blur(80px);
+}
+
+/* NAV */
+.nav { width:100%; max-width:680px; display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-orb {
+  width:34px; height:34px; border-radius:50%;
+  background:radial-gradient(ellipse at 40% 35%,#3b1e7a 0%,#14092e 70%);
+  border:1px solid rgba(201,168,106,0.15); display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:15px; color:var(--gold2);
+}
+.nav-name { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:17px; letter-spacing:0.22em; color:var(--cream); text-transform:uppercase; }
+.nav-sub { font-size:6.5px; letter-spacing:0.3em; color:var(--slate); text-transform:uppercase; display:block; margin-top:1px; }
+
+/* WRAP */
+.result-wrap { width:100%; max-width:640px; }
+
+/* CARD PRINCIPAL */
+.result-card {
+  background: linear-gradient(135deg, rgba(18,14,30,0.95), rgba(12,9,20,0.98));
+  border: 1px solid rgba(201,168,106,0.1);
+  border-radius: 20px;
+  padding: 48px 40px;
+  box-shadow: 0 50px 120px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.result-card::before {
+  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,106,0.35), transparent);
+}
+
+/* HEADER */
+.result-header { text-align:center; margin-bottom:36px; }
+.result-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(201,168,106,0.07); border:1px solid rgba(201,168,106,0.15);
+  border-radius:100px; padding:5px 16px;
+  font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:14px;
+}
+.result-name { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:14px; color:var(--slate); letter-spacing:0.1em; margin-bottom:4px; }
+
+/* PASOS (indicador de progreso 1-2-3) */
+.step-pill {
+  display:inline-flex; align-items:center; gap:7px;
+  background: rgba(201,168,106,0.07); border:1px solid rgba(201,168,106,0.15);
+  border-radius:100px; padding:5px 14px;
+  font-size:8px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:14px;
+}
+.step-pill .step-pill-num {
+  width:14px; height:14px; border-radius:50%;
+  background:var(--gold); color:#050409;
+  display:flex; align-items:center; justify-content:center;
+  font-size:8px; font-weight:600; flex-shrink:0;
+}
+
+/* GRÁFICA CIRCULAR */
+.score-section { display:flex; flex-direction:column; align-items:center; margin-bottom:36px; }
+
+.ring-wrap { position:relative; width:200px; height:200px; margin-bottom:20px; }
+
+.ring-svg { transform:rotate(-90deg); }
+
+.ring-track { fill:none; stroke:rgba(201,168,106,0.07); stroke-width:12; }
+
+.ring-fill {
+  fill:none;
+  stroke-width:12;
+  stroke-linecap:round;
+  stroke-dasharray: 534;
+  stroke-dashoffset: 534;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1), stroke 0.3s;
+}
+
+.ring-center {
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+
+.ring-pct {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  font-size:52px;
+  line-height:1;
+  display:block;
+  transition: color 0.5s;
+}
+
+.ring-label {
+  font-size:8px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--slate);
+  display:block;
+  margin-top:4px;
+}
+
+.score-verdict {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  font-size:26px;
+  text-align:center;
+  margin-bottom:6px;
+  opacity:0;
+  transform:translateY(8px);
+  transition: all .6s .5s ease;
+}
+.score-verdict.show { opacity:1; transform:translateY(0); }
+
+.score-verdict-sub {
+  font-size:12px; font-weight:300; color:var(--slate);
+  text-align:center; max-width:400px;
+  opacity:0; transform:translateY(8px);
+  transition: all .6s .7s ease;
+}
+.score-verdict-sub.show { opacity:1; transform:translateY(0); }
+
+/* SEPARADOR */
+.sep { width:100%; height:1px; background:linear-gradient(90deg,transparent,rgba(201,168,106,0.08),transparent); margin:28px 0; }
+
+/* BREAKDOWN */
+.breakdown { display:flex; flex-direction:column; gap:14px; margin-bottom:28px; }
+
+.breakdown-item {
+  display:flex; align-items:center; gap:12px;
+  opacity:0; transform:translateX(-8px);
+  transition: all .5s ease;
+}
+.breakdown-item.show { opacity:1; transform:translateX(0); }
+
+.breakdown-label { font-size:10px; letter-spacing:0.1em; color:var(--slate); width:130px; flex-shrink:0; text-transform:uppercase; }
+
+.breakdown-track { flex:1; height:5px; background:rgba(201,168,106,0.07); border-radius:100px; overflow:hidden; }
+
+.breakdown-bar { height:100%; border-radius:100px; width:0%; transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
+
+.breakdown-val { font-size:11px; width:36px; text-align:right; flex-shrink:0; font-weight:500; }
+
+/* ANÁLISIS */
+.analysis-box {
+  background: rgba(14,10,24,0.5);
+  border: 1px solid rgba(201,168,106,0.07);
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:28px;
+  opacity:0; transform:translateY(8px);
+  transition: all .6s 1.2s ease;
+}
+.analysis-box.show { opacity:1; transform:translateY(0); }
+
+.analysis-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:8px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:12px;
+}
+
+.analysis-text { font-size:12px; font-weight:300; color:var(--slate); line-height:1.85; }
+
+/* CTA VIABLE */
+.cta-viable {
+  text-align:center;
+  opacity:0; transform:translateY(8px);
+  transition: all .6s 1.5s ease;
+}
+.cta-viable.show { opacity:1; transform:translateY(0); }
+
+.cta-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:20px; color:var(--cream); margin-bottom:6px; line-height:1.25; }
+.cta-sub { font-size:11px; font-weight:300; color:var(--slate); margin-bottom:18px; line-height:1.6; max-width:440px; margin-left:auto; margin-right:auto; }
+
+.step-divider { margin-top:24px; margin-bottom:12px; }
+
+.cta-note { font-size:9px; color:var(--slate2); letter-spacing:0.08em; margin-top:10px; }
+
+/* CTA NO VIABLE */
+.cta-no-viable {
+  text-align:center;
+  opacity:0; transform:translateY(8px);
+  transition: all .6s 1.5s ease;
+}
+.cta-no-viable.show { opacity:1; transform:translateY(0); }
+
+.no-viable-box {
+  background:rgba(192,57,43,0.05);
+  border:1px solid rgba(192,57,43,0.12);
+  border-radius:12px; padding:28px; margin-bottom:20px;
+  text-align:left;
+}
+.no-viable-title { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); margin-bottom:8px; }
+.no-viable-text { font-size:11px; font-weight:300; color:var(--slate); line-height:1.8; margin-bottom:20px; }
+
+.no-viable-steps {
+  display:flex; flex-direction:column; gap:10px;
+}
+.no-viable-step {
+  display:flex; align-items:flex-start; gap:12px;
+}
+.step-icon {
+  width:22px; height:22px; border-radius:50%;
+  background:rgba(192,57,43,0.1); border:1px solid rgba(192,57,43,0.2);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; margin-top:1px;
+  font-size:9px; font-weight:500; color:#c0392b; letter-spacing:0;
+}
+.step-text { font-size:11px; font-weight:300; color:var(--slate); line-height:1.7; }
+.step-text strong { color:var(--cream); font-weight:400; }
+
+/* FORMULARIO NO VIABLE */
+.form-section {
+  background: rgba(14,10,24,0.6);
+  border:1px solid rgba(201,168,106,0.1);
+  border-radius:16px;
+  padding:32px 28px;
+  margin-top:8px;
+  text-align:left;
+}
+.form-section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600; font-size:20px; color:var(--cream);
+  margin-bottom:6px;
+}
+.form-section-sub {
+  font-size:11px; font-weight:300; color:var(--slate);
+  line-height:1.7; margin-bottom:24px;
+}
+.form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.form-label {
+  font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--gold); font-weight:400;
+}
+.form-input, .form-textarea {
+  background: rgba(6,5,12,0.6);
+  border:1px solid rgba(201,168,106,0.12);
+  border-radius:10px;
+  padding:14px 16px;
+  font-family:'Montserrat',sans-serif;
+  font-size:12px; font-weight:300; color:var(--cream);
+  outline:none; transition:border-color .25s, box-shadow .25s;
+  width:100%;
+}
+.form-input::placeholder, .form-textarea::placeholder { color:var(--slate2); }
+.form-input:focus, .form-textarea:focus {
+  border-color:rgba(201,168,106,0.35);
+  box-shadow:0 0 0 3px rgba(201,168,106,0.06);
+}
+.form-textarea { resize:vertical; min-height:90px; line-height:1.6; }
+.form-input[readonly] { color:var(--slate); cursor:default; }
+
+.btn-form-submit {
+  display:block; width:100%;
+  background: linear-gradient(135deg, #8a52ee 0%, #5d20d6 100%);
+  color:#f6f1ff;
+  border:1px solid rgba(180,140,255,0.35);
+  padding:16px;
+  border-radius:10px;
+  font-family:'Montserrat',sans-serif; font-weight:400; font-size:10px; letter-spacing:0.25em; text-transform:uppercase;
+  cursor:pointer;
+  transition:all .3s;
+  margin-top:4px;
+  box-shadow: 0 0 40px rgba(123,63,228,0.28), 0 6px 22px rgba(0,0,0,0.5);
+}
+.btn-form-submit:hover { box-shadow: 0 0 66px rgba(123,63,228,0.45), 0 10px 30px rgba(0,0,0,0.55); }
+.btn-form-submit:disabled { opacity:0.5; cursor:not-allowed; }
+
+.form-success {
+  display:none;
+  text-align:center;
+  padding:32px 20px;
+}
+.form-success-icon {
+  width:48px; height:48px; border-radius:50%;
+  background:rgba(47,163,122,0.1); border:1px solid rgba(47,163,122,0.2);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 16px;
+}
+.form-success-title {
+  font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream);
+  margin-bottom:8px;
+}
+.form-success-text { font-size:11px; font-weight:300; color:var(--slate); line-height:1.7; }
+.form-error-msg {
+  font-size:10px; color:#c0392b; margin-top:12px; text-align:center; display:none;
+}
+
+/* DISCLAIMER */
+.disclaimer {
+  font-size:9px; color:var(--slate2); text-align:center;
+  line-height:1.6; margin-top:20px; padding:0 20px;
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+
+@media(max-width:600px) {
+  body { padding:24px 16px 60px; }
+  .result-card { padding:28px 18px; }
+  .breakdown-label { width:90px; font-size:8.5px; }
+  .ring-wrap { width:160px; height:160px; flex-shrink:0; }
+  .ring-svg { width:160px; height:160px; }
+  .ring-pct { font-size:40px; }
+  .ring-label { font-size:7px; }
+  .score-verdict { font-size:22px; }
+  .analysis-text { font-size:11.5px; }
+  .cta-title { font-size:18px; }
+  .cta-sub { font-size:10.5px; }
+}
+
+/* VSL en el resultado */
+.vsl-res {
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#000;
+  border:1px solid rgba(201,168,106,0.14);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:8px;
+}
+.vsl-res iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+
+/* Bloque de coste oculto */
+.cost-block{
+  width:100%;
+  border-radius:14px;
+  border:1px solid rgba(201,168,106,0.16);
+  background: linear-gradient(135deg, rgba(58,30,122,0.28), rgba(12,9,20,0.9));
+  padding:32px 28px;
+  text-align:center;
+  margin:8px 0 4px;
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(10px);
+  transition: all .6s ease;
+}
+.cost-block.show{ opacity:1; transform:translateY(0); }
+.cost-block::before{
+  content:'';
+  position:absolute; top:0; left:20%; right:20%; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,106,0.45), transparent);
+}
+.cost-eyebrow{
+  font-size:8.5px; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--gold); display:block; margin-bottom:14px;
+}
+.cost-big{
+  font-family:'Cormorant Garamond', serif;
+  font-weight:600;
+  font-size:clamp(40px,8vw,62px);
+  line-height:1;
+  background: linear-gradient(135deg, #e6cf9f, #c9a86a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.cost-sub{
+  font-size:11px; font-weight:300; color:#8a82a6; line-height:1.75;
+  max-width:420px; margin:12px auto 0;
+}
+.cost-detail{
+  display:flex; justify-content:center; gap:26px; flex-wrap:wrap;
+  margin-top:20px; padding-top:18px;
+  border-top:1px solid rgba(201,168,106,0.10);
+}
+.cost-item{ text-align:center; }
+.cost-item-num{ font-size:16px; color:var(--cream); font-weight:400; display:block; }
+.cost-item-label{ font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:#5e5680; }
+
+@media (max-width:768px){
+  .cost-detail{ gap:16px; }
+}
+
+</style>
+</head>
+<body>
+<script>
+/* ══ CAPTURA DE ATRIBUCIÓN ══ — ver el comentario largo en quiz.html ══ */
+(function () {
+  var KEY = 'diag_attrib';
+  var CAMPOS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
+                'fbclid','gclid','ttclid','msclkid','ref'];
+  try {
+    var p = new URLSearchParams(window.location.search);
+    var todos = {};
+    p.forEach(function (v, k) { todos[k] = v; });
+    var traeAlgo = CAMPOS.some(function (c) { return p.get(c); });
+    var previo = {};
+    try { previo = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+    if (traeAlgo || !previo.landing_url) {
+      var rec = {
+        landing_url: window.location.href,
+        query_params: traeAlgo ? todos : (previo.query_params || {})
+      };
+      CAMPOS.forEach(function (c) {
+        rec[c] = traeAlgo ? (p.get(c) || '') : (previo[c] || '');
+      });
+      localStorage.setItem(KEY, JSON.stringify(rec));
+    }
+  } catch (e) {}
+})();
+</script>
+<div class="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-orb">T</div>
+    <div>
+      <span class="nav-name">Tu Marca</span>
+      <span class="nav-sub">Tu categoría de negocio</span>
+    </div>
+  </a>
+</div>
+
+<div class="result-wrap">
+  <div class="result-card">
+
+    <div class="result-header">
+      <div class="result-eyebrow">Paso 1 de 3 · Tu resultado</div>
+      <p class="result-name" id="result-name">Cargando...</p>
+    </div>
+
+    <!-- GRÁFICA -->
+    <div class="score-section">
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="200" height="200" viewBox="0 0 200 200">
+          <circle class="ring-track" cx="100" cy="100" r="85"/>
+          <circle class="ring-fill" id="ring-fill" cx="100" cy="100" r="85"/>
+        </svg>
+        <div class="ring-center">
+          <span class="ring-pct" id="ring-pct">0%</span>
+          <span class="ring-label">Trabajo evitable</span>
+        </div>
+      </div>
+      <h2 class="score-verdict" id="score-verdict"></h2>
+      <p class="score-verdict-sub" id="score-verdict-sub"></p>
+    </div>
+
+    <!-- COSTE OCULTO -->
+    <div class="cost-block" id="cost-block">
+      <span class="cost-eyebrow">Coste de oportunidad estimado</span>
+      <div class="cost-big" id="cost-big">0 €</div>
+      <p class="cost-sub" id="cost-sub"></p>
+      <div class="cost-detail">
+        <div class="cost-item">
+          <span class="cost-item-num" id="cost-horas">0 h</span>
+          <span class="cost-item-label">Horas al año</span>
+        </div>
+        <div class="cost-item">
+          <span class="cost-item-num" id="cost-veces">0</span>
+          <span class="cost-item-label">Veces / semana</span>
+        </div>
+        <div class="cost-item">
+          <span class="cost-item-num" id="cost-min">0 min</span>
+          <span class="cost-item-label">Por vez</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- BREAKDOWN -->
+    <div class="breakdown" id="breakdown"></div>
+
+    <div class="sep"></div>
+
+    <!-- ANÁLISIS -->
+    <div class="analysis-box" id="analysis-box">
+      <div class="analysis-tag">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#c9a86a" stroke-width="1.5"/><path d="M12 8v4M12 16h.01" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Lectura de tu caso
+      </div>
+      <p class="analysis-text" id="analysis-text"></p>
+    </div>
+
+    <!-- CTA -->
+    <div id="cta-wrap"></div>
+
+  </div>
+
+  <p class="disclaimer">Estimación basada en tus respuestas y un coste medio de 22 €/hora. Es una referencia, no una auditoría; se ajusta con datos reales en la llamada.</p>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN — cambia esto antes de lanzar
+   ══════════════════════════════════════════════════════════════ */
+const CALENDAR_EMBED_URL = ''; // URL de embed de tu calendario (Calendly, GoHighLevel, Cal.com...). Vacío = muestra un placeholder con instrucciones.
+const VSL_EMBED_URL      = ''; // URL de embed de tu vídeo (Loom, YouTube, Vimeo...). Vacío = no muestra vídeo.
+// Webhook 2: solo para quien NO cualifica pero aun así rellena el formulario
+// de la rama "no encaja". A propósito es un webhook distinto al del quiz,
+// para poder mandarlo a otra columna/pipeline en tu CRM.
+const WEBHOOK_URL_NOENCAJE = '';
+/* ════════════════════════════════════════════════════════════ */
+
+const raw = localStorage.getItem('diag_result');
+
+if (!raw) {
+  window.location.href = '/quiz';
+} else {
+  initResults(JSON.parse(raw));
+}
+
+function euros(n) {
+  return new Intl.NumberFormat('es-ES').format(Math.round(n)) + ' €';
+}
+
+function initResults(data) {
+  const { name, company, score, cats, costeTotal, horasAnio, vecesSemana, minutos, hasDisqualifier, redFlags, orangeFlags } = data;
+
+  document.getElementById('result-name').textContent = company ? 'Informe de ' + company : 'Informe de ' + name;
+
+  // Color según score
+  let scoreColor;
+  if (score >= 70) scoreColor = '#a173ff';
+  else if (score >= 40) scoreColor = '#c9a86a';
+  else scoreColor = '#8a82a6';
+
+  // Anillo
+  const circumference = 534;
+  const ring = document.getElementById('ring-fill');
+  ring.style.stroke = scoreColor;
+  const pctEl = document.getElementById('ring-pct');
+  pctEl.style.color = scoreColor;
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      ring.style.strokeDashoffset = circumference - (score / 100) * circumference;
+      let current = 0;
+      const step = Math.max(1, Math.ceil(score / 60));
+      const timer = setInterval(() => {
+        current = Math.min(current + step, score);
+        pctEl.textContent = current + '%';
+        if (current >= score) clearInterval(timer);
+      }, 25);
+    }, 150);
+  });
+
+  // Veredicto
+  const verdictData = getVerdict(score, hasDisqualifier);
+  const verdictEl = document.getElementById('score-verdict');
+  const verdictSubEl = document.getElementById('score-verdict-sub');
+  verdictEl.textContent = verdictData.title;
+  verdictEl.style.color = scoreColor;
+  verdictSubEl.textContent = verdictData.sub;
+  setTimeout(() => { verdictEl.classList.add('show'); verdictSubEl.classList.add('show'); }, 400);
+
+  // Coste oculto
+  const costBlock = document.getElementById('cost-block');
+  if (hasDisqualifier || !costeTotal) {
+    costBlock.style.display = 'none';
+  } else {
+    document.getElementById('cost-horas').textContent = new Intl.NumberFormat('es-ES').format(horasAnio) + ' h';
+    document.getElementById('cost-veces').textContent = String(vecesSemana).replace('.', ',');
+    document.getElementById('cost-min').textContent   = String(minutos).replace('.', ',') + ' min';
+    document.getElementById('cost-sub').textContent   =
+      'Es lo que cuesta al año, en horas de tu propia gente, hacer esta tarea a mano. No es una factura que llegue: es tiempo pagado que no se ve en ninguna cuenta.';
+
+    // Contador animado del euro
+    let cur = 0;
+    const inc = Math.max(1, Math.ceil(costeTotal / 70));
+    const bigEl = document.getElementById('cost-big');
+    setTimeout(() => {
+      const t = setInterval(() => {
+        cur = Math.min(cur + inc, costeTotal);
+        bigEl.textContent = euros(cur);
+        if (cur >= costeTotal) clearInterval(t);
+      }, 22);
+    }, 700);
+    setTimeout(() => costBlock.classList.add('show'), 650);
+  }
+
+  // Desglose
+  const bwrap = document.getElementById('breakdown');
+  Object.entries(cats).forEach(([label, val], i) => {
+    const barColor = val >= 70 ? '#a173ff' : val >= 40 ? '#c9a86a' : '#5e5680';
+    const div = document.createElement('div');
+    div.className = 'breakdown-item';
+    div.innerHTML = `
+      <span class="breakdown-label">${label}</span>
+      <div class="breakdown-track"><div class="breakdown-bar" id="bar-${i}" style="background:${barColor}"></div></div>
+      <span class="breakdown-val" style="color:${barColor}">${val}%</span>
+    `;
+    bwrap.appendChild(div);
+    setTimeout(() => {
+      div.classList.add('show');
+      setTimeout(() => { document.getElementById('bar-'+i).style.width = val + '%'; }, 100);
+    }, 900 + i * 150);
+  });
+
+  // Análisis
+  const analysis = generateAnalysis(name, score, cats, hasDisqualifier, costeTotal, data);
+  document.getElementById('analysis-text').textContent = analysis;
+  setTimeout(() => { document.getElementById('analysis-box').classList.add('show'); }, 1400);
+
+  // CTA
+  const ctaWrap = document.getElementById('cta-wrap');
+  if (score >= 40 && !hasDisqualifier) {
+    // OJO: aquí NO va 'Schedule'. Ese evento se dispara en tu página de
+    // "gracias" / confirmación, cuando la cita está reservada de verdad.
+    // Aquí solo marcamos que ha visto el calendario, útil para diagnosticar
+    // la caída pero NO para optimizar campañas.
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'VeCalendario', { content_name: 'Diagnostico', value: costeTotal || 0, currency: 'EUR' });
+    }
+
+    const calendario = CALENDAR_EMBED_URL
+      ? `<div style="width:100%;margin-bottom:16px;border-radius:12px;overflow:hidden;">
+           <iframe src="${CALENDAR_EMBED_URL}" allow="payment" style="width:100%;height:700px;border:none;overflow:hidden;" scrolling="no"></iframe>
+         </div>`
+      : `<div style="width:100%;margin-bottom:16px;border-radius:12px;border:1px dashed rgba(201,168,106,0.28);background:rgba(201,168,106,0.04);padding:48px 24px;text-align:center;">
+           <p style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#c9a86a;margin-bottom:10px;">Aquí va el calendario</p>
+           <p style="font-size:11.5px;color:#8a82a6;line-height:1.7;max-width:340px;margin:0 auto;">Pega la URL de embed de tu calendario en la constante <strong style="color:#ede7da;">CALENDAR_EMBED_URL</strong>, arriba en este archivo, y este bloque se sustituye por el calendario real.</p>
+         </div>`;
+
+    ctaWrap.innerHTML = `
+      <div class="cta-viable" id="cta-viable">
+        <span class="step-pill"><span class="step-pill-num">2</span>Paso 2 de 3 · Mira el vídeo</span>
+        <h3 class="cta-title">${score >= 70 ? 'Esto se quita rápido' : 'Vale la pena mirarlo'}</h3>
+        <p class="cta-sub">${score >= 70
+          ? 'Tu caso es justo el que resolvemos. Te lo explicamos en 2 minutos.'
+          : 'Hay margen, aunque no sea el caso más claro. Te lo explicamos en 2 minutos.'}</p>
+        ${VSL_EMBED_URL ? `
+          <div class="vsl-res">
+            <iframe src="${VSL_EMBED_URL}" frameborder="0" allowfullscreen></iframe>
+          </div>` : ''}
+
+        <div class="step-divider">
+          <span class="step-pill"><span class="step-pill-num">3</span>Paso 3 de 3 · Agenda tu llamada</span>
+        </div>
+        ${calendario}
+        <p class="cta-note">Gratuita · 30 minutos · Sin compromiso</p>
+      </div>
+    `;
+    setTimeout(() => { document.getElementById('cta-viable').classList.add('show'); }, 1600);
+
+  } else {
+    const steps = generateImprovementSteps(cats, hasDisqualifier, data);
+    const stepsHTML = steps.map((s, i) => `
+      <div class="no-viable-step">
+        <div class="step-icon">${i+1}</div>
+        <p class="step-text"><strong>${s.title}</strong> — ${s.desc}</p>
+      </div>
+    `).join('');
+
+    const noTitle = hasDisqualifier
+      ? 'Esto ya está resuelto'
+      : 'Por ahora, no compensa meter mano';
+    const noText = hasDisqualifier
+      ? 'Si ya está automatizada, no hay una tarea manual que quitar aquí. El día que vuelva a hacerse a mano —cambio de herramienta, de proveedor, de proceso— vuelve a hacer el diagnóstico.'
+      : 'Con la frecuencia y los tiempos que nos has dado, el ahorro no justifica el trabajo de montarlo. Preferimos decírtelo ahora que venderte un proyecto que no te va a devolver lo que cuesta.';
+
+    ctaWrap.innerHTML = `
+      <div class="cta-no-viable" id="cta-no-viable">
+        <div class="no-viable-box">
+          <p class="no-viable-title">${noTitle}</p>
+          <p class="no-viable-text">${noText}</p>
+          <div class="no-viable-steps">${stepsHTML}</div>
+        </div>
+
+        <div class="form-section" id="form-section">
+          <p class="form-section-title">¿Aun así quieres que lo miremos?</p>
+          <p class="form-section-sub">Si crees que tu caso tiene algo que el cuestionario no ha recogido, déjanos tus datos y le echamos un vistazo. Te decimos lo que veamos, sin presión y sin llamada comercial.</p>
+
+          <div id="form-body">
+            <div class="form-group">
+              <label class="form-label" for="f-name">Nombre</label>
+              <input class="form-input" type="text" id="f-name" placeholder="Tu nombre" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-email">Email</label>
+              <input class="form-input" type="email" id="f-email" placeholder="tu@empresa.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-phone">Teléfono <span style="color:var(--slate2)">(opcional)</span></label>
+              <input class="form-input" type="tel" id="f-phone" placeholder="+34 600 000 000" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-note">¿Algo que quieras contarnos? <span style="color:var(--slate2)">(opcional)</span></label>
+              <textarea class="form-textarea" id="f-note" placeholder="Cómo lo lleváis hoy, qué os gustaría quitar..."></textarea>
+            </div>
+            <button class="btn-form-submit" id="btn-form-submit" onclick="submitNoEncajeForm()">Quiero que lo miréis</button>
+            <p class="form-error-msg" id="form-error">Por favor, rellena nombre y email.</p>
+          </div>
+
+          <div class="form-success" id="form-success">
+            <div class="form-success-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#2fa37a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="form-success-title">Recibido. Te escribimos en breve.</p>
+            <p class="form-success-text">Le echamos un vistazo a lo que nos has contado y te decimos con honestidad qué vemos. Si en unos meses cambia el volumen o la forma de trabajar, escríbenos y lo miramos otra vez.</p>
+          </div>
+        </div>
+
+        <p class="cta-note" style="margin-top:14px;">Sin compromiso · Sin llamadas comerciales</p>
+      </div>
+    `;
+
+    const saved = JSON.parse(localStorage.getItem('diag_result') || '{}');
+    if (saved.name)  document.getElementById('f-name').value  = saved.name;
+    if (saved.email) document.getElementById('f-email').value = saved.email;
+    if (saved.phone && document.getElementById('f-phone')) document.getElementById('f-phone').value = saved.phone;
+
+    setTimeout(() => { document.getElementById('cta-no-viable').classList.add('show'); }, 1600);
+  }
+}
+
+// ─── FORMULARIO NO ENCAJE ───────────────────────────────────────────────────
+function submitNoEncajeForm() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const phone = document.getElementById('f-phone') ? document.getElementById('f-phone').value.trim() : '';
+  const note  = document.getElementById('f-note').value.trim();
+  const errEl = document.getElementById('form-error');
+
+  if (!name || !email) { errEl.style.display = 'block'; return; }
+  errEl.style.display = 'none';
+
+  const btn = document.getElementById('btn-form-submit');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const saved = JSON.parse(localStorage.getItem('diag_result') || '{}');
+  const payload = {
+    name, email, phone, note,
+    company: saved.company || '',
+    score: saved.score || 0,
+    nivel: 'No encaja',
+    respuestas: saved.answers || [], // array completo {id, q, a, score, flag} de cada pregunta del quiz
+    source: 'Diagnóstico - No encaja',
+    fbp: saved.fbp || '',
+    fbc: saved.fbc || '',
+    fbclid: saved.fbclid || '',
+    event_source_url: window.location.href,
+    tags: ['diagnostico-no-encaja', 'nurturing']
+  };
+
+  const done = () => {
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  };
+
+  if (WEBHOOK_URL_NOENCAJE) {
+    fetch(WEBHOOK_URL_NOENCAJE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {}).finally(done);
+  } else {
+    done();
+  }
+}
+
+// ─── PASOS SUGERIDOS ────────────────────────────────────────────────────────
+function generateImprovementSteps(cats, disqualifier, data) {
+  const steps = [];
+
+  if (disqualifier) {
+    steps.push({ title:'Nada que hacer por ahora', desc:'Si la tarea ya está automatizada, no hay tiempo manual que quitar. Es una buena noticia, no una objeción.' });
+    steps.push({ title:'Vigila cuándo vuelve a ser manual', desc:'Un cambio de herramienta, de proveedor o de proceso puede devolver el trabajo a mano sin que nadie se dé cuenta.' });
+    steps.push({ title:'Repite el diagnóstico si cambia algo', desc:'En un par de minutos sabrás si vuelve a compensar mirarlo.' });
+    return steps;
+  }
+
+  if ((cats['Tamaño y estructura'] || 0) < 60) {
+    steps.push({ title:'El tamaño del equipo manda', desc:'Con poca gente, el tiempo que se ahorra no paga el trabajo de montarlo. Cuando crezcáis, la cuenta cambia sola.' });
+  }
+  if ((cats['Frecuencia y volumen'] || 0) < 60) {
+    steps.push({ title:'La frecuencia es baja todavía', desc:'Si esto pasa pocas veces por semana, el margen de ahorro es pequeño. El cálculo mejora en cuanto sube el volumen.' });
+  }
+  if ((cats['Dependencia de una persona'] || 0) < 60) {
+    steps.push({ title:'Deja el proceso por escrito', desc:'Aunque hoy no compense automatizar, documentar cómo se hace es lo que evita que todo dependa de una persona.' });
+  }
+  if (steps.length === 0) {
+    steps.push({ title:'Estás cerca, pero no del todo', desc:'Ninguna parte falla del todo, pero la suma no llega al punto donde el ahorro justifica el proyecto.' });
+    steps.push({ title:'Revísalo dentro de unos meses', desc:'Si sube la frecuencia o entra otra persona a hacer la tarea, vuelve a hacer el diagnóstico: el número cambia rápido.' });
+  }
+  return steps;
+}
+
+// ─── VEREDICTO ──────────────────────────────────────────────────────────────
+function getVerdict(score, disqualifier) {
+  if (disqualifier) return { title:'Ya está resuelto', sub:'Si la tarea ya está automatizada, no hay nada que optimizar aquí' };
+  if (score >= 75)  return { title:'Fuga alta y localizada', sub:'Hay mucho trabajo manual y se sabe exactamente dónde está' };
+  if (score >= 55)  return { title:'Fuga clara', sub:'Buena parte de esa tarea se puede quitar sin tocar el resto del proceso' };
+  if (score >= 40)  return { title:'Fuga moderada', sub:'Hay margen, aunque conviene mirarlo caso por caso' };
+  return { title:'Poco que rascar hoy', sub:'Por frecuencia o por estructura, ahora mismo no compensa' };
+}
+
+// ─── ANÁLISIS PERSONALIZADO ─────────────────────────────────────────────────
+function generateAnalysis(name, score, cats, disqualifier, costeTotal, data) {
+  const fuerte = [];
+  const flojo  = [];
+
+  if (cats['Frecuencia y volumen'] >= 80) fuerte.push('mucha frecuencia: esto pasa una y otra vez cada semana');
+  else if (cats['Frecuencia y volumen'] < 50) flojo.push('la frecuencia con la que pasa esto es baja');
+
+  if (cats['Tiempo por tarea'] >= 80) fuerte.push('bastante tiempo cada vez que alguien se pone con ello');
+  else if (cats['Tiempo por tarea'] < 50) flojo.push('cada vez que se hace, se resuelve rápido');
+
+  if (cats['Dependencia de una persona'] >= 85) fuerte.push('una tarea que hoy sostiene prácticamente una sola persona');
+  if (cats['Tamaño y estructura'] >= 85) fuerte.push('tamaño suficiente para que cada minuto ahorrado se note');
+
+  const importe = costeTotal ? new Intl.NumberFormat('es-ES').format(costeTotal) + ' €' : null;
+
+  if (disqualifier) {
+    return `${name}, si la tarea ya está automatizada, no hay tiempo manual que recuperar aquí. Cuando vuelva a hacerse a mano —por un cambio de herramienta o de proceso— es el momento de volver a mirarlo.`;
+  }
+  if (score >= 75) {
+    const str = fuerte.slice(0,2).join(' y ') || 'una tarea muy manual';
+    return `${name}, tienes ${str}. Eso es${importe ? ' unos ' + importe : ''} al año en horas de tu gente que se van en esto en vez de en lo que de verdad mueve la aguja. La buena noticia es que es justo el tipo de proceso que se quita primero.`;
+  }
+  if (score >= 55) {
+    const str = fuerte[0] || 'trabajo manual repetido cada semana';
+    return `${name}, en tu caso pesa sobre todo ${str}.${importe ? ' El cálculo sale en unos ' + importe + ' al año.' : ''} No es la fuga más grande que vemos, pero es constante: se repite todas las semanas y crece con el negocio. Media hora de llamada basta para ver por dónde empezar.`;
+  }
+  if (score >= 40) {
+    const str = flojo[0] || 'algunas partes de esto ya bastante ajustadas';
+    return `${name}, hay margen pero no es evidente: ${str}.${importe ? ' El coste estimado ronda los ' + importe + ' al año.' : ''} Merece la pena mirarlo con más detalle antes de decidir nada.`;
+  }
+  return `${name}, con lo que nos has contado el ahorro no da para justificar un proyecto. Preferimos decírtelo claro. Si en unos meses sube la frecuencia o cambia quién hace la tarea, vuelve a hacer el diagnóstico: el número se mueve mucho más rápido de lo que parece.`;
+}
+</script>
+
+</body>
+</html>

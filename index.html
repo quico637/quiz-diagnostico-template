@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Marca — Diagnóstico gratuito</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- Meta Pixel Code — reemplaza TU_PIXEL_ID_AQUI por el ID de tu píxel (idéntico en index.html, quiz.html y resultado.html) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'TU_PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=TU_PIXEL_ID_AQUI&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+:root {
+  --bg: #08060e;
+  --gold: #c9a86a;
+  --gold2: #e6cf9f;
+  --cream: #ede7da;
+  --slate: #8a82a6;
+  --slate2: #5e5680;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 80px;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position:fixed;
+  top:-200px; left:50%;
+  transform:translateX(-50%);
+  width:800px; height:800px;
+  border-radius:50%;
+  background: radial-gradient(ellipse, rgba(93,32,214,0.30) 0%, transparent 70%);
+  pointer-events:none;
+  filter:blur(80px);
+}
+.nav { width:100%; max-width:680px; display:flex; align-items:center; justify-content:space-between; margin-bottom:80px; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-orb {
+  width:34px; height:34px; border-radius:50%;
+  background:radial-gradient(ellipse at 40% 35%,#3b1e7a 0%,#14092e 70%);
+  border:1px solid rgba(201,168,106,0.15); display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:15px; color:var(--gold2);
+}
+.nav-name { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:17px; letter-spacing:0.22em; color:var(--cream); text-transform:uppercase; }
+.nav-sub { font-size:6.5px; letter-spacing:0.3em; color:var(--slate); text-transform:uppercase; display:block; margin-top:1px; }
+.nav-links a { color:var(--slate); font-size:11px; text-decoration:none; letter-spacing:0.05em; }
+.nav-links a:hover { color:var(--cream); }
+
+.hero { width:100%; max-width:680px; text-align:center; }
+.eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(201,168,106,0.07); border: 1px solid rgba(201,168,106,0.15);
+  border-radius:100px; padding:5px 16px;
+  font-size:8.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:22px;
+}
+.hero-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(32px,6vw,54px); line-height:1.1; margin-bottom:20px; }
+.hero-title em { font-style:italic; background:linear-gradient(135deg,var(--gold2),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-sub { font-size:13px; font-weight:300; color:var(--slate); line-height:1.8; max-width:460px; margin:0 auto 36px; }
+.btn-cta {
+  display:inline-block;
+  background: linear-gradient(135deg, #8a52ee 0%, #5d20d6 100%);
+  color:#f6f1ff;
+  border:1px solid rgba(180,140,255,0.35);
+  padding:17px 38px; border-radius:10px;
+  font-family:'Montserrat',sans-serif; font-weight:500; font-size:10px; letter-spacing:0.25em; text-transform:uppercase;
+  text-decoration:none;
+  box-shadow: 0 0 40px rgba(123,63,228,0.28), 0 6px 22px rgba(0,0,0,0.5);
+  transition: all .3s;
+}
+.btn-cta:hover { box-shadow: 0 0 66px rgba(123,63,228,0.45), 0 10px 30px rgba(0,0,0,0.55); transform:translateY(-2px); }
+.hero-note { font-size:9px; color:var(--slate2); letter-spacing:0.1em; margin-top:16px; }
+
+footer { margin-top:100px; text-align:center; }
+footer a { color:var(--slate2); font-size:9px; letter-spacing:0.1em; text-decoration:none; }
+footer a:hover { color:var(--slate); }
+</style>
+</head>
+<body>
+<script>
+/* ══ CAPTURA DE ATRIBUCIÓN ══ — ver el comentario largo en quiz.html ══ */
+(function () {
+  var KEY = 'diag_attrib';
+  var CAMPOS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
+                'fbclid','gclid','ttclid','msclkid','ref'];
+  try {
+    var p = new URLSearchParams(window.location.search);
+    var todos = {};
+    p.forEach(function (v, k) { todos[k] = v; });
+    var traeAlgo = CAMPOS.some(function (c) { return p.get(c); });
+    var previo = {};
+    try { previo = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+    if (traeAlgo || !previo.landing_url) {
+      var rec = {
+        landing_url: window.location.href,
+        query_params: traeAlgo ? todos : (previo.query_params || {})
+      };
+      CAMPOS.forEach(function (c) {
+        rec[c] = traeAlgo ? (p.get(c) || '') : (previo[c] || '');
+      });
+      localStorage.setItem(KEY, JSON.stringify(rec));
+    }
+  } catch (e) {}
+})();
+</script>
+<div class="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-orb">T</div>
+    <div>
+      <span class="nav-name">Tu Marca</span>
+      <span class="nav-sub">Tu categoría de negocio</span>
+    </div>
+  </a>
+  <div class="nav-links"><a href="/privacidad">Privacidad</a></div>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Diagnóstico gratuito · 1 minuto</div>
+  <h1 class="hero-title">Esta es tu <em>landing de ejemplo</em><br>— sustitúyela por la tuya</h1>
+  <p class="hero-sub">Esta página es solo un punto de entrada al quiz, pensada para que el repo funcione de punta a punta nada más desplegarlo. Normalmente aquí irá tu landing real (la que ya tengas en Webflow, GoHighLevel, Framer...) con un botón que apunte a /quiz.</p>
+  <a href="/quiz" class="btn-cta">Hacer el diagnóstico →</a>
+  <p class="hero-note">Gratuito · Sin compromiso · Resultado inmediato</p>
+</div>
+
+<footer><a href="/privacidad">Política de privacidad</a></footer>
+</body>
+</html>

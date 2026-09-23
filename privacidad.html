@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad | Tu Empresa</title>
+    <meta name="description"
+        content="Política de Privacidad de Tu Empresa. Información sobre el tratamiento de tus datos personales.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --brand: #5d20d6;
+            --brand-dark: #4a1ab0;
+            --glow: rgba(93, 32, 214, 0.35);
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            height: 100% !important;
+            overflow: hidden !important;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0A0A !important;
+            color: #e5e5e5 !important;
+        }
+        /* Contenedor scroll propio */
+        #scroll-root {
+            background: #0A0A0A;
+            color: #e5e5e5;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            height: 66px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: #71717a;
+            font-size: .875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+        .nav-links a.active {
+            color: #fff;
+        }
+        .btn-nav {
+            background: var(--brand) !important;
+            color: #fff !important;
+            padding: .5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 700 !important;
+            font-size: .85rem !important;
+            box-shadow: 0 4px 14px var(--glow);
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-nav:hover {
+            background: var(--brand-dark) !important;
+        }
+        /* HAMBURGER */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            gap: 5px;
+            border: none;
+            background: transparent;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #e5e5e5;
+            border-radius: 2px;
+            transition: all .3s;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        .mobile-menu {
+            display: none;
+            position: sticky;
+            top: 66px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            z-index: 9998;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 1rem;
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+        .mobile-menu a {
+            color: #a1a1aa;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: .75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            transition: color .2s;
+        }
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+        .mobile-menu a:hover {
+            color: #fff;
+        }
+        .mobile-menu .btn-mobile {
+            background: var(--brand);
+            color: #fff !important;
+            border-radius: 10px;
+            padding: .85rem 1.25rem;
+            text-align: center;
+            font-weight: 700;
+            border-bottom: none !important;
+            text-decoration: none;
+            display: block;
+        }
+        /* PAGE LAYOUT */
+        .privacy-page {
+            min-height: calc(100vh - 66px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+        }
+        .privacy-wrap {
+            width: 100%;
+            max-width: 900px;
+        }
+        /* HEADER */
+        .privacy-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        .stag {
+            display: inline-block;
+            padding: .25rem .75rem;
+            border-radius: 99px;
+            border: 1px solid rgba(93, 32, 214, .35);
+            background: rgba(93, 32, 214, .08);
+            color: #a78bfa;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: .75rem;
+        }
+        .privacy-title {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -.01em;
+            margin-bottom: 1.25rem;
+        }
+        .privacy-subtitle {
+            color: #52525b;
+            font-size: .95rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* CONTENT CARD */
+        .privacy-card {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .privacy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(93, 32, 214, .6), transparent);
+        }
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: rgba(93, 32, 214, .08);
+            border: 1px solid rgba(93, 32, 214, .2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: .95rem;
+        }
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .65rem;
+        }
+        .toc-list li a {
+            color: #a78bfa;
+            font-size: .85rem;
+            text-decoration: none;
+            transition: color .2s;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .toc-list li a::before {
+            content: '→';
+            opacity: 0;
+            transition: opacity .2s;
+        }
+        .toc-list li a:hover {
+            color: #c4b5fd;
+        }
+        .toc-list li a:hover::before {
+            opacity: 1;
+        }
+        /* SECTIONS */
+        .privacy-section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 100px;
+        }
+        .section-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(93, 32, 214, .15);
+            color: #a78bfa;
+            font-weight: 700;
+            font-size: .75rem;
+            text-align: center;
+            line-height: 28px;
+            margin-right: .5rem;
+            margin-bottom: .5rem;
+        }
+        .section-title {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .section-content {
+            color: #d4d4d8;
+            font-size: .95rem;
+            line-height: 1.8;
+        }
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+        .section-content ul,
+        .section-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+        .section-content li {
+            margin-bottom: .65rem;
+            color: #d4d4d8;
+        }
+        .section-content strong {
+            color: #fff;
+            font-weight: 700;
+        }
+        .section-content a {
+            color: #a78bfa;
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .section-content a:hover {
+            color: #c4b5fd;
+            text-decoration: underline;
+        }
+        .highlight-box {
+            background: rgba(93, 32, 214, .08);
+            border-left: 3px solid var(--brand);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .highlight-box strong {
+            display: block;
+            color: #a78bfa;
+            font-size: .85rem;
+            margin-bottom: .5rem;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+        .highlight-box p {
+            margin: 0;
+            color: #d4d4d8;
+        }
+        /* FOOTER */
+        footer {
+            background: #0A0A0A;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, .05);
+            margin-top: 4rem;
+        }
+        .foot-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .foot-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .foot-links a {
+            color: #3f3f46;
+            font-size: .78rem;
+            text-decoration: none;
+            transition: color .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+        .foot-links a:hover {
+            color: #71717a;
+        }
+        /* BACK TO TOP */
+        .back-to-top {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .07);
+            text-align: center;
+        }
+        .back-to-top a {
+            color: #a78bfa;
+            font-size: .85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .back-to-top a:hover {
+            color: #c4b5fd;
+        }
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .privacy-page {
+                padding: 2rem 1.25rem;
+            }
+            .privacy-card {
+                padding: 1.75rem;
+                border-radius: 18px;
+            }
+            .toc {
+                padding: 1.5rem;
+            }
+            .privacy-header {
+                margin-bottom: 2.5rem;
+            }
+        }
+        @media (max-width: 500px) {
+            .privacy-card {
+                padding: 1.25rem;
+                border-radius: 16px;
+            }
+            .section-title {
+                font-size: 1.1rem;
+            }
+            .privacy-title {
+                font-size: 1.75rem;
+            }
+        }
+        /* GHL FULL-WIDTH FIX */
+        .elCustom,
+        .custom-html-widget,
+        [class*="elCustom"],
+        [class*="custom-code"],
+        .el-container,
+        .inner-wrap {
+            max-width: 100% !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            overflow: visible !important;
+        }
+        html,
+        body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="scroll-root">
+        <!-- NAV -->
+        <nav>
+            <div class="nav-inner">
+                <!-- Logo: sustituye por tu <img src="/logo.png"> o similar -->
+                <a href="/">
+                    <span style="font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;">Tu Empresa</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/#planes">Planes</a>
+                    <a href="/#testimonios">Testimonios</a>
+                    <a href="/contacto">Contacto</a>
+                    <a href="https://cal.com/tu-usuario/tu-evento" target="_blank" class="btn-nav">Hablar
+                        con nosotros →</a>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+        <!-- MOBILE MENU -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="/#planes" onclick="closeMobileMenu()">Planes</a>
+            <a href="/#testimonios" onclick="closeMobileMenu()">Testimonios</a>
+            <a href="/contacto" onclick="closeMobileMenu()">Contacto</a>
+            <a href="https://cal.com/tu-usuario/tu-evento" target="_blank" class="btn-mobile">Hablar con
+                nosotros →</a>
+        </div>
+        <!-- PRIVACY PAGE -->
+        <div class="privacy-page">
+            <div class="privacy-wrap">
+                <!-- HEADER -->
+                <div class="privacy-header">
+                    <span class="stag">Legal</span>
+                    <h1 class="privacy-title">Política de <em style="font-style:italic;color:var(--brand);">Privacidad</em></h1>
+                    <p class="privacy-subtitle">
+                        Tu privacidad es importante para nosotros. Conoce cómo recopilamos, usamos y protegemos tus datos personales.
+                    </p>
+                </div>
+                <!-- CONTENT CARD -->
+                <div class="privacy-card">
+                    <!-- TABLE OF CONTENTS -->
+                    <div class="toc">
+                        <div class="toc-title">Índice de contenidos</div>
+                        <ul class="toc-list">
+                            <li><a href="#section-1">Identidad del responsable</a></li>
+                            <li><a href="#section-2">Qué datos recogemos</a></li>
+                            <li><a href="#section-3">Finalidad del tratamiento</a></li>
+                            <li><a href="#section-4">Base legal</a></li>
+                            <li><a href="#section-5">Destinatarios de los datos</a></li>
+                            <li><a href="#section-6">Conservación de datos</a></li>
+                            <li><a href="#section-7">Tus derechos</a></li>
+                            <li><a href="#section-8">Cookies</a></li>
+                            <li><a href="#section-9">Cambios en la política</a></li>
+                            <li><a href="#section-10">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <!-- SECTIONS -->
+                    <div class="privacy-section" id="section-1">
+                        <h2 class="section-title">
+                            <span class="section-number">1</span>
+                            Identidad del responsable del tratamiento
+                        </h2>
+                        <div class="section-content">
+                            <p>
+                                <strong>Tu Empresa, S.L.</strong> es responsable del tratamiento de tus datos personales.
+                            </p>
+                            <p>
+                                <strong>Dirección:</strong> Tu ciudad, Tu país<br>
+                                <strong>Email:</strong> hola@tudominio.com<br>
+                                <strong>Teléfono:</strong> Disponible en nuestra página de contacto
+                            </p>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-2">
+                        <h2 class="section-title">
+                            <span class="section-number">2</span>
+                            Qué datos personales recopilamos
+                        </h2>
+                        <div class="section-content">
+                            <p>Recopilamos los siguientes datos según la interacción que tengas con nosotros:</p>
+                            <ul>
+                                <li><strong>Datos de identificación:</strong> Nombre, apellidos, email, teléfono, empresa y cargo.</li>
+                                <li><strong>Datos de navegación:</strong> Dirección IP, tipo de dispositivo, navegador, páginas visitadas y duración de la sesión.</li>
+                                <li><strong>Datos de interacción:</strong> Formularios completados, mensajes, consultas y comentarios que envíes.</li>
+                                <li><strong>Datos de consentimiento:</strong> Registro de tu aceptación de políticas y preferencias de comunicación.</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>Nota importante</strong>
+                                <p>No recopilamos datos bancarios ni de pago en nuestro sitio web. Cualquier transacción de pago se realiza a través de plataformas de terceros con sus propias políticas de privacidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-3">
+                        <h2 class="section-title">
+                            <span class="section-number">3</span>
+                            Para qué usamos tus datos
+                        </h2>
+                        <div class="section-content">
+                            <p>Utilizamos tus datos personales para los siguientes fines:</p>
+                            <ul>
+                                <li><strong>Gestión de consultas:</strong> Responder a tus preguntas y propuestas comerciales.</li>
+                                <li><strong>Prestación de servicios:</strong> Ejecutar contratos y proporcionar los servicios que has solicitado.</li>
+                                <li><strong>Comunicaciones comerciales:</strong> Enviarte información sobre nuestros servicios, promociones y actualizaciones (solo si lo has autorizado).</li>
+                                <li><strong>Análisis y mejora:</strong> Analizar el uso de nuestro sitio web para optimizar la experiencia del usuario.</li>
+                                <li><strong>Cumplimiento legal:</strong> Cumplir con obligaciones legales y regulatorias aplicables.</li>
+                                <li><strong>Seguridad:</strong> Prevenir y detectar fraude, abuso y actividades ilícitas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-4">
+                        <h2 class="section-title">
+                            <span class="section-number">4</span>
+                            Base legal para el tratamiento
+                        </h2>
+                        <div class="section-content">
+                            <p>El tratamiento de tus datos se basa en:</p>
+                            <ul>
+                                <li><strong>Tu consentimiento:</strong> Para comunicaciones comerciales y marketing.</li>
+                                <li><strong>Contrato:</strong> Para ejecutar un contrato que has solicitado.</li>
+                                <li><strong>Obligación legal:</strong> Para cumplir leyes aplicables.</li>
+                                <li><strong>Interés legítimo:</strong> Para mejorar nuestros servicios y prevenir fraude.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-5">
+                        <h2 class="section-title">
+                            <span class="section-number">5</span>
+                            A quién compartimos tus datos
+                        </h2>
+                        <div class="section-content">
+                            <p>Tus datos pueden ser compartidos con:</p>
+                            <ul>
+                                <li><strong>Proveedores de servicios:</strong> Plataformas de email, CRM, hosting, análisis web y otras herramientas necesarias para prestar nuestros servicios.</li>
+                                <li><strong>Autoridades públicas:</strong> Si la ley lo requiere o para proteger derechos legales.</li>
+                                <li><strong>Socios comerciales:</strong> Solo con tu consentimiento previo y expreso.</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>Transferencias internacionales</strong>
+                                <p>Algunos proveedores están ubicados fuera de la UE. Utilizamos Cláusulas Contractuales Estándar para garantizar la protección de tus datos conforme a la normativa europea.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-6">
+                        <h2 class="section-title">
+                            <span class="section-number">6</span>
+                            Cuánto tiempo conservamos tus datos
+                        </h2>
+                        <div class="section-content">
+                            <p>Conservamos tus datos durante el tiempo necesario para:</p>
+                            <ul>
+                                <li>Mantener la relación comercial contigo.</li>
+                                <li>Cumplir obligaciones legales (generalmente 3-6 años según la legislación aplicable).</li>
+                                <li>Ejercer o defender acciones legales.</li>
+                            </ul>
+                            <p>
+                                Una vez finalizada la relación y transcurridos los plazos de retención legal, eliminaremos tus datos de manera segura, salvo que hayas solicitado mantenerse en nuestras listas de comunicación.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-7">
+                        <h2 class="section-title">
+                            <span class="section-number">7</span>
+                            Tus derechos como interesado
+                        </h2>
+                        <div class="section-content">
+                            <p>Conforme a la legislación de protección de datos, tienes los siguientes derechos:</p>
+                            <ul>
+                                <li><strong>Derecho de acceso:</strong> Conocer qué datos tenemos sobre ti.</li>
+                                <li><strong>Derecho de rectificación:</strong> Corregir datos inexactos o incompletos.</li>
+                                <li><strong>Derecho de supresión:</strong> Solicitar la eliminación de tus datos (derecho al olvido).</li>
+                                <li><strong>Derecho de limitación:</strong> Restringir el uso de tus datos en ciertos casos.</li>
+                                <li><strong>Derecho de portabilidad:</strong> Recibir tus datos en formato estructurado.</li>
+                                <li><strong>Derecho de oposición:</strong> Oponte al tratamiento de tus datos para ciertas finalidades.</li>
+                                <li><strong>Derecho a no ser objeto de decisiones automatizadas:</strong> No estar sujeto a decisiones basadas únicamente en procesamiento automatizado.</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>Cómo ejercer tus derechos</strong>
+                                <p>Para ejercer cualquiera de estos derechos, contacta con nosotros en <strong>hola@tudominio.com</strong> indicando tu solicitud. Responderemos en un plazo máximo de 30 días.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-8">
+                        <h2 class="section-title">
+                            <span class="section-number">8</span>
+                            Cookies y tecnologías de rastreo
+                        </h2>
+                        <div class="section-content">
+                            <p>Nuestro sitio web utiliza cookies para mejorar tu experiencia:</p>
+                            <ul>
+                                <li><strong>Cookies esenciales:</strong> Necesarias para el funcionamiento del sitio web.</li>
+                                <li><strong>Cookies de análisis:</strong> Para entender cómo usas nuestro sitio (Google Analytics).</li>
+                                <li><strong>Cookies de marketing:</strong> Para personalizar anuncios y ofertas.</li>
+                            </ul>
+                            <p>
+                                Puedes gestionar tus preferencias de cookies en cualquier momento a través de los controles de tu navegador. Rechazar cookies no esenciales no afectará al funcionamiento básico del sitio.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-9">
+                        <h2 class="section-title">
+                            <span class="section-number">9</span>
+                            Cambios en esta política
+                        </h2>
+                        <div class="section-content">
+                            <p>
+                                Podemos actualizar esta política de privacidad en cualquier momento para reflejar cambios en nuestras prácticas, tecnología, requisitos legales u otros factores. Los cambios significativos serán comunicados por email o a través de un aviso destacado en nuestro sitio web.
+                            </p>
+                            <p>
+                                <strong>Última actualización:</strong> [Mes de Año]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="privacy-section" id="section-10">
+                        <h2 class="section-title">
+                            <span class="section-number">10</span>
+                            Contacto y reclamaciones
+                        </h2>
+                        <div class="section-content">
+                            <p>Si tienes preguntas sobre esta política o sobre cómo tratamos tus datos:</p>
+                            <ul>
+                                <li><strong>Email:</strong> hola@tudominio.com</li>
+                                <li><strong>Formulario de contacto:</strong> Disponible en <a href="/contacto">tudominio.com/contacto</a></li>
+                            </ul>
+                            <p>
+                                También tienes derecho a presentar una reclamación ante la Autoridad de Protección de Datos de tu país si consideras que tus derechos han sido vulnerados.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- BACK TO TOP -->
+                    <div class="back-to-top">
+                        <a href="#scroll-root" onclick="document.getElementById('scroll-root').scrollTo({top:0, behavior:'smooth'})">
+                            ↑ Volver al inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <footer>
+            <div class="foot-inner">
+                <!-- Logo: sustituye por tu <img src="/logo.png"> o similar -->
+                <span style="font-family:'Instrument Serif',serif;font-size:1.2rem;color:#fff;">Tu Empresa</span>
+                <div class="foot-links">
+                    <a href="/privacidad" class="active">Política de Privacidad</a>
+                    <a href="#">Aviso Legal</a>
+                    <!-- Añade aquí tus propios enlaces a redes sociales si quieres -->
+                </div>
+                <span style="color:#3f3f46;font-size:.78rem;">© 2026 Tu Empresa</span>
+            </div>
+        </footer>
+        <script>
+            // Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+            function closeMobileMenu() {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            }
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+            });
+            // Smooth scroll for TOC links
+            document.querySelectorAll('.toc-list a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        </script>
+    </div><!-- /scroll-root -->
+</body>
+</html>
